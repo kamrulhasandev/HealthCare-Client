@@ -14,8 +14,9 @@ import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { registerPatient } from "@/services/actions/registerPatient";
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { userLogin } from "@/services/actions/userLogin";
+import { storeUserInfo } from "@/services/auth.service";
 
 type Inputs = {
   password: string;
@@ -40,8 +41,14 @@ const RegisterPage = () => {
     try {
       const res = await registerPatient(data);
       if (res?.data?.id) {
-        toast.success(res?.message);
-        router.push("/login");
+        const result = await userLogin({
+          password: values.password,
+          email: values.patient.email,
+        });
+        if (result?.data?.accessToken) {
+          storeUserInfo({ accessToken: result?.data?.accessToken });
+          router.push("/");
+        }
       }
     } catch (error: any) {
       console.error(error.message);
