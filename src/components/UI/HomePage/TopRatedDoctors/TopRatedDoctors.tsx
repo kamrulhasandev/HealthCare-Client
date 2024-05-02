@@ -22,7 +22,6 @@ const TopRatedDoctors = async () => {
   );
   const { data: doctors } = await res.json();
 
-  console.log(doctors);
   return (
     <Box
       sx={{
