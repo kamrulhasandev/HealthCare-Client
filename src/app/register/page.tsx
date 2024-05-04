@@ -53,7 +53,7 @@ const RegisterPage = () => {
         });
         if (result?.data?.accessToken) {
           storeUserInfo({ accessToken: result?.data?.accessToken });
-          router.push("/");
+          router.push("/dashboard");
         }
       } else {
         setError(res.message);
