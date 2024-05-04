@@ -8,6 +8,9 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ReviewsIcon from "@mui/icons-material/Reviews";
 import TryIcon from "@mui/icons-material/Try";
 import { USER_ROLE } from "@/constant/role";
+import PaymentsIcon from '@mui/icons-material/Payments';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+
 
 export const drawerItems = (role: UserRole): DrawerItem[] => {
   const roleMenus: DrawerItem[] = [];
@@ -93,12 +96,12 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
         {
           title: "Prescriptions",
           path: `${role}/prescriptions`,
-          icon: DashboardIcon,
+          icon: ReceiptIcon,
         },
         {
           title: "Payment History",
           path: `${role}/payment-history`,
-          icon: DashboardIcon,
+          icon: PaymentsIcon,
         }
       );
       break;
