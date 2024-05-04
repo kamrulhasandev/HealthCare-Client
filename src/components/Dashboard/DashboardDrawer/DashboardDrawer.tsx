@@ -44,11 +44,14 @@ export default function DashboardDrawer({
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
+          background: "#f4f7fe",
+          boxShadow: 0,
+          borderBottom: "1px solid lightgray",
         }}
       >
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="primary"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
@@ -56,9 +59,14 @@ export default function DashboardDrawer({
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>
+          <Box>
+            <Typography variant="body2" noWrap component="div" color={"gray"}>
+              Hi, there
+            </Typography>
+            <Typography variant="body2" noWrap component="div" color={"primary"}>
+              Welcome To, PH Health Care !
+            </Typography>
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
