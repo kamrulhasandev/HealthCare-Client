@@ -23,10 +23,10 @@ export type ResponseSuccessType = {
   meta?: IMeta;
 };
 
-export type ResponseErrorType = {
+export type IGenericErrorResponse = {
   statusCode: number;
   message: string;
-  errorMessages: IGenericErrorMessage;
+  errorMessages: IGenericErrorMessage[];
 };
 
 export type IGenericErrorMessage = {

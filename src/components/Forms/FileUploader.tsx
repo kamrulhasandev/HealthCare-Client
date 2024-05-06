@@ -11,7 +11,7 @@ type TProps = {
   sx?: SxProps;
 };
 
-export default function FileUploader({ name, label, sx }: TProps) {
+export default function PHFileUploader({ name, label, sx }: TProps) {
   const { control } = useFormContext();
   return (
     <Controller
@@ -27,7 +27,7 @@ export default function FileUploader({ name, label, sx }: TProps) {
             startIcon={<CloudUploadIcon />}
             sx={{ ...sx }}
           >
-            {label || "Upload File"}
+            {label || "Upload file"}
             <Input
               {...field}
               type={name}
