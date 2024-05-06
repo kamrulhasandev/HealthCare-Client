@@ -27,10 +27,11 @@ type TModalProps = {
 };
 
 export default function PHModal({
-  open,
+  open = false,
   setOpen,
-  title,
+  title = "",
   children,
+  sx
 }: TModalProps) {
   const handleClose = () => {
     setOpen(false);
@@ -42,6 +43,7 @@ export default function PHModal({
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
+        sx={{...sx}}
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           {title}
@@ -59,11 +61,6 @@ export default function PHModal({
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>{children}</DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Save changes
-          </Button>
-        </DialogActions>
       </BootstrapDialog>
     </React.Fragment>
   );
