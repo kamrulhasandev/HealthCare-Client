@@ -12,6 +12,7 @@ const specialtiesApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [TagTypes.specialties],
     }),
+
     getAllSpecialty: build.query({
       query: () => ({
         url: "/specialties",
@@ -19,8 +20,19 @@ const specialtiesApi = baseApi.injectEndpoints({
       }),
       providesTags: [TagTypes.specialties],
     }),
+
+    deleteSpecialty: build.mutation({
+      query: (id) => ({
+        url: `/specialties/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [TagTypes.specialties],
+    }),
   }),
 });
 
-export const { useCreateSpecialtyMutation, useGetAllSpecialtyQuery } =
-  specialtiesApi;
+export const {
+  useCreateSpecialtyMutation,
+  useGetAllSpecialtyQuery,
+  useDeleteSpecialtyMutation,
+} = specialtiesApi;
