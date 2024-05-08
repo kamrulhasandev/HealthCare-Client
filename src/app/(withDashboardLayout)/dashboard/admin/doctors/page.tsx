@@ -11,11 +11,21 @@ import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { toast } from "sonner";
+import { useDebounced } from "@/redux/hooks";
 
 const DoctorsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { data, isLoading } = useGetAllDoctorsQuery({});
+  const query: Record<string, any> = {};
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const debouncedTerm = useDebounced({
+    searchQuery: "searchTerm",
+    delay: 600,
+  });
+  if (!!debouncedTerm) {
+    query["searchTerm"] = searchTerm;
+  }
+  const { data, isLoading } = useGetAllDoctorsQuery({ ...query });
   const [deleteDoctor] = useDeleteDoctorMutation();
   const doctors = data?.doctors;
   const meta = data?.meta;
@@ -78,7 +88,11 @@ const DoctorsPage = () => {
           isSubmitting={isSubmitting}
           setIsSubmitting={setIsSubmitting}
         />
-        <TextField size="small" placeholder="Search doctors" />
+        <TextField
+          onChange={(e) => setSearchTerm(e.target.value)}
+          size="small"
+          placeholder="Search doctors"
+        />
       </Stack>
       {!isLoading ? (
         <Box my={2}>
