@@ -1,5 +1,5 @@
 import FileUploader from "@/components/Forms/FileUploader";
-import PHDatePicker from "@/components/Forms/PHDatepicker";
+import PHDatePicker from "@/components/Forms/PHDatePicker";
 import PHForm from "@/components/Forms/PHForm";
 import PHInput from "@/components/Forms/PHInput";
 import PHModal from "@/components/Shared/PHModal/PHModal";
@@ -25,26 +25,14 @@ const SchedulesModal = ({
   setIsSubmitting,
 }: TProps) => {
   const handleFormSubmit = async (values: FieldValues) => {
-    // setIsSubmitting(true);
-    // const data = modifyPayload(values);
-    // try {
-    //   const res = await createSpecialty(data).unwrap();
-    //   if (res?.id) {
-    //     toast.success("Specialties Created Successfully.");
-    //     setOpen(false);
-    //   }
-    // } catch (error: any) {
-    //   console.error(error.message);
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+    console.log(values);
   };
   return (
     <PHModal open={open} setOpen={setOpen} title={"Create A New Schedule"}>
       <PHForm onSubmit={handleFormSubmit}>
         <Grid container spacing={2}>
           <Grid item md={12}>
-          <PHDatePicker/>
+            <PHDatePicker name="startDate" />
           </Grid>
         </Grid>
         <Button disabled={isSubmitting} type="submit" sx={{ mt: 1 }}>
