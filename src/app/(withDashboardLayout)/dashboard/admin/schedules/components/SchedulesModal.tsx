@@ -12,6 +12,7 @@ import React from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { dateFormatter } from "@/utils/dateFormatter";
+import { timeFormatter } from "@/utils/timeFormatter";
 
 type TProps = {
   open: boolean;
@@ -29,6 +30,8 @@ const SchedulesModal = ({
   const handleFormSubmit = async (values: FieldValues) => {
     values.startDate = dateFormatter(values.startDate);
     values.endDate = dateFormatter(values.endDate);
+    values.startTime = timeFormatter(values.startTime);
+    values.endTime = timeFormatter(values.endTime);
 
     console.log(values);
   };
