@@ -1,18 +1,14 @@
-import FileUploader from "@/components/Forms/FileUploader";
 import PHDatePicker from "@/components/Forms/PHDatePicker";
 import PHTimePicker from "@/components/Forms/PHTimePicker";
 import PHForm from "@/components/Forms/PHForm";
-import PHInput from "@/components/Forms/PHInput";
 import PHModal from "@/components/Shared/PHModal/PHModal";
-import { useCreateSpecialtyMutation } from "@/redux/api/specialtiesApi";
-import { modifyPayload } from "@/utils/modifyPayload";
 import { Button, CircularProgress, Grid } from "@mui/material";
-
 import React from "react";
 import { FieldValues } from "react-hook-form";
-import { toast } from "sonner";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { timeFormatter } from "@/utils/timeFormatter";
+import { useCreateScheduleMutation } from "@/redux/api/scheduleApi";
+import { toast } from "sonner";
 
 type TProps = {
   open: boolean;
@@ -27,13 +23,25 @@ const SchedulesModal = ({
   isSubmitting,
   setIsSubmitting,
 }: TProps) => {
+  const [createSchedule] = useCreateScheduleMutation();
+
   const handleFormSubmit = async (values: FieldValues) => {
+    setIsSubmitting(true);
     values.startDate = dateFormatter(values.startDate);
     values.endDate = dateFormatter(values.endDate);
     values.startTime = timeFormatter(values.startTime);
     values.endTime = timeFormatter(values.endTime);
-
-    console.log(values);
+    try {
+      const res: any = await createSchedule(values);
+      if (res?.data?.length) {
+        toast.success("Schedules created Successfully");
+        setOpen(false)
+      }
+    } catch (error: any) {
+      console.error(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return (
     <PHModal open={open} setOpen={setOpen} title={"Create A New Schedule"}>
