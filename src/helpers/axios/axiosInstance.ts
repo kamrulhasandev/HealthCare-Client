@@ -45,7 +45,8 @@ instance.interceptors.response.use(
     // set new accessToken using browser cookie
     const config = error.config;
 
-    if (error?.response?.status === 500) {
+    if (error?.response?.status === 500 && !config.sent) {
+      config.sent = true;
       const response = await getNewAccessToken();
       const accessToken = response?.data?.accessToken;
       config.headers["Authorization"] = accessToken;
